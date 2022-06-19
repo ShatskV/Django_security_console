@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.utils.timezone import localtime
 
-from datacenter.models import Passcard, Visit
-
 from datacenter.format_utils import format_duration
+from datacenter.models import Passcard, Visit
 
 
 def passcard_info_view(request, passcode):
