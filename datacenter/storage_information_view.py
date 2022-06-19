@@ -3,12 +3,7 @@ from django.utils.timezone import localtime
 
 from datacenter.models import Passcard, Visit
 
-
-def format_duration(seconds):
-    duration = '%02d:%02d:%02d' % (seconds // 3600, 
-                                   (seconds % 3600) // 60,
-                                   seconds  % 60)
-    return duration
+from datacenter.format_utils import format_duration
 
 
 def storage_information_view(request):
