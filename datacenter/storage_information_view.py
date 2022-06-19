@@ -1,15 +1,14 @@
 from django.shortcuts import render
 from django.utils.timezone import localtime
 
-from datacenter.models import Passcard, Visit
-
 from datacenter.format_utils import format_duration
+from datacenter.models import Passcard, Visit
 
 
 def storage_information_view(request):
-    current_visits = Visit.objects.filter(leaved_at=None)
-    non_closed_visits = []
-    for visit in current_visits:
+    unclosed_visits = Visit.objects.filter(leaved_at=None)
+    serialized_visits = []
+    for visit in unclosed_visits:
         entered_time = localtime(visit.entered_at).strftime('%d-%m-%Y %H:%M')
         duration = format_duration(visit.duration)
         
@@ -19,9 +18,9 @@ def storage_information_view(request):
                         'duration': duration,
                         'is_strange': visit.is_visit_long
                        }
-        non_closed_visits.append(visit_to_add)
+        serialized_visits.append(visit_to_add)
    
     context = {
-        'non_closed_visits': non_closed_visits,
+        'non_closed_visits': serialized_visits,
     }
     return render(request, 'storage_information.html', context)
