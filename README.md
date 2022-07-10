@@ -24,7 +24,7 @@
 
 - Запустите через проект через консоль:
   ```
-  python3 main.py
+  python3 manage.py runserver 0.0.0.0:8000
   ```
 
 
